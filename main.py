@@ -4,14 +4,9 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+@app.get("/hotels/{hotel_id}")
+async def get_hotel(hotel_id: int, date_from, date_to):
+    return {"hotel_id": hotel_id, "date_from": date_from, "date_to": date_to, "result": "success"}
 
 
 if __name__ == "__main__":
