@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI, Query
 from typing import Optional
 from datetime import date
+from schemas import BookingSchema
 
 app = FastAPI()
 
@@ -19,6 +20,11 @@ async def get_hotel(
             "rating": rating,
             "has_spa": has_spa,
             "result": "success"}
+
+
+@app.post("/bookings")
+async def add_booking(booking: BookingSchema):
+    pass
 
 
 if __name__ == "__main__":
