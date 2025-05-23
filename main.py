@@ -1,38 +1,33 @@
 import uvicorn
-from fastapi import FastAPI, Query
-from typing import Optional
-from datetime import date
+from fastapi import FastAPI, Depends
 from schemas import BookingSchema, HotelSchema
+from query_params import HotelQueryParams
 
 app = FastAPI()
 
 
-@app.get("/hotels/{hotel_id}", response_model=list[HotelSchema])
-async def get_hotel(
-                    date_from: date,
-                    date_to: date,
-                    location: str,
-                    rating: Optional[int] = Query(None, ge=1, le=5),
-                    has_spa: Optional[bool] = None,):
+@app.get("/hotels}", response_model=list[HotelSchema])
+async def get_hotel(query_schema: HotelQueryParams = Depends()):
 
     mock_data = [
         {
-            "address": "Almaty, Gagarin street, 12",
+            "address": "Gagarin Street 12, Almaty",
             "name": "Pushkin Hotel",
-            "rating": 3,
+            "rating": 3
         },
         {
-            "address": "Almaty, Al-Farabi street, 23/1",
+            "address": "Al-Farabi Street 4/1, Almaty",
             "name": "Abay Hotel",
-            "rating": 4,
-        },
+            "rating": 5
+        }
     ]
 
-    hotels_list: list[HotelSchema] = []
-    for hotel in mock_data:
-        hotels_list.append(HotelSchema(**hotel))
+    hotels_result: list[HotelSchema] = []
 
-    return hotels_list
+    for hotel in mock_data:
+        hotels_result.append(HotelSchema(**hotel))
+
+    return hotels_result
 
 
 @app.post("/bookings")
