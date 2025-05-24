@@ -14,7 +14,7 @@ class HotelQueryParams:
     ):
 
         self.date_from = date_from
-        self.date_to   = date_to
-        self.location  = location
-        self.rating    = rating
-        self.has_spa   = has_spa
+        self.date_to = date_to
+        self.location = location
+        self.rating = rating
+        self.has_spa = has_spa
