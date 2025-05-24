@@ -6,7 +6,7 @@ from query_params import HotelQueryParams
 app = FastAPI()
 
 
-@app.get("/hotels}", response_model=list[HotelSchema])
+@app.get("/hotels", response_model=list[HotelSchema])
 async def get_hotel(query_schema: HotelQueryParams = Depends()):
 
     mock_data = [
