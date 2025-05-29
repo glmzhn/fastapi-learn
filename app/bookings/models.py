@@ -11,5 +11,5 @@ class Bookings(Base):
     date_from = Column(Date, nullable=False)
     date_to = Column(Date, nullable=False)
     daily_price = Column(Float, nullable=False)
-    total_cost = Column(Float, Computed("(date_from - date_to) * daily_price)"))
-    total_days = Column(Integer, Computed("(date_from - date_to)"))
+    total_days = Column(Integer, Computed("(date_to - date_from)"))
+    total_cost = Column(Float, Computed("((date_to - date_from) * daily_price)"))
